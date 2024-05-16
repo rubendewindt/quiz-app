@@ -1,0 +1,35 @@
+
+:root{
+    /* Kleuren definiëren. */
+    --textColor: black;
+    --background: lightcyan;
+
+    /* Afstanden definiëren. */
+    --borderRadius: 10px;
+    --paddingDefault: 10px;
+    background: linear-gradient(to right, #00FFFF, #FF00FF);
+}
+
+#content
+{
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ color: var(--textColor);
+ background-color: var(--background);
+ width: 65%;
+ max-width: 800px;
+ min-width: 300px;
+ max-height: 1200px;
+ min-height: 500px;
+ height: 900px;
+ margin: 3% auto;
+}
+#quote
+{
+    margin-top: 50px;
+}
+
+
+
+
+
+
