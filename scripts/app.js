@@ -17,7 +17,7 @@ window.addEventListener("load", function(){
         //navigeer button 
 
         document.getElementById('NaarQuizButton').addEventListener('click', function() {
-            window.location.href = 'offline.html';
+            window.location.href = 'CatSelect.html';
         });
 });
 

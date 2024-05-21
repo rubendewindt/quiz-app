@@ -4,9 +4,11 @@ const DYNAMIC_CACHE_NAME = "dynamic-version-1";
 // Array met alle static files die gecached moeten worden.
 const staticFiles = [
     '/index.html',
+    '/CatSelect.html',
     '/offline.html',
     '/scripts/app.js',
     '/scripts/service-worker.js',
+    '/scripts/fetch.js',
     '/styles/style.css',
     '/manifest.json',
     '/images/icons/favicon.ico',
