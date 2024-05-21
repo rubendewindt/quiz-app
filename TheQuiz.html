@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Fetch API demo</title>
+    <!-- Link naar stijlblad. -->
+    <link href="styles/style.css" rel="stylesheet">
+    <script src="scripts/app.js"></script>
+    <script src="scripts/fetch.js"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <h2>Question</h2>
+    <div id="question">...</div>
+
+    <h2>Answer</h2>
+    <div id="answer">...</div>
+
+    <h2>Choices</h2>
+    <div id="choices">...</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', displayStoredData);
+
+        function displayStoredData() {
+            const question = localStorage.getItem('question');
+            const answer = localStorage.getItem('answer');
+            const questionType = localStorage.getItem('questionType');
+            const choices = localStorage.getItem('choices');
+
+            document.getElementById('question').innerHTML = question;
+            document.getElementById('answer').innerHTML = answer;
+            document.getElementById('choices').innerHTML = choices;
+
+            // Optionally, handle the question type if needed
+            if (questionType) {
+                const questionTypeElement = document.createElement('div');
+                questionTypeElement.innerHTML = `<h2>Question Type</h2><div>${questionType}</div>`;
+                document.body.insertBefore(questionTypeElement, document.getElementById('question').parentElement);
+            }
+        }
+    </script>
+</body>
+</html>

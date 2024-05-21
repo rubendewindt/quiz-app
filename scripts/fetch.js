@@ -4,6 +4,7 @@ function init() {
     fetchCategories();
     document.getElementById('category-select').addEventListener('change', fetchQuestion);
     document.getElementById('difficulty-select').addEventListener('change', fetchQuestion);
+    document.getElementById('start').addEventListener('click', saveDataAndRedirect);
 }
 
 function fetchCategories() {
@@ -55,7 +56,7 @@ function showData(jsonData) {
     const choicesContainer = document.getElementById("choices");
 
     const data = jsonData.results[0];
-    
+
     question.innerHTML = data.question;
     answer.innerHTML = data.correct_answer;
     questionType.innerHTML = data.type.charAt(0).toUpperCase() + data.type.slice(1); // Capitalize first letter
@@ -84,5 +85,19 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+function saveDataAndRedirect() {
+    const question = document.getElementById("question").innerHTML;
+    const answer = document.getElementById("answer").innerHTML;
+    const questionType = document.getElementById("question-type").innerHTML;
+    const choicesContainer = document.getElementById("choices").innerHTML;
+
+    localStorage.setItem('question', question);
+    localStorage.setItem('answer', answer);
+    localStorage.setItem('questionType', questionType);
+    localStorage.setItem('choices', choicesContainer);
+
+    window.location.href = 'TheQuiz.html';
 }
 
