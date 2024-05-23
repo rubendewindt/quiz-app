@@ -1,45 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <title>Fetch API demo</title>
-    <!-- Link naar stijlblad. -->
-    <link href="styles/style.css" rel="stylesheet">
-    <script src="scripts/app.js"></script>
-    <script src="scripts/fetch.js"></script>
-    <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+        <title>Fetch API demo</title>
+        <link href="styles/style.css" rel="stylesheet">
+        <script src="scripts/app.js"></script>
+        
+        <link rel="manifest" href="manifest.json">
+    </head>
+    <body>
+        <h2>Select Category</h2>
+        <select id="category-select">
+            <option value="">Select a category...</option>
+        </select>
     
-    <h2>Select Category</h2>
-    <select id="category-select">
-        <option value="">Select a category...</option>
-    </select>
+        <h2>Select Difficulty</h2>
+        <select id="difficulty-select">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    
+        <button id="start">ENTER!!!!</button>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', init);
+    
+            function init() {
+                fetchCategories();
+                document.getElementById('start').addEventListener('click', saveDataAndRedirect);
+            }
+    
+            function fetchCategories() {
+                fetch("https://opentdb.com/api_category.php")
+                    .then(response => response.json())
+                    .then(data => populateCategories(data.trivia_categories))
+                    .catch(onRejected);
+            }
+    
+            function populateCategories(categories) {
+                const categorySelect = document.getElementById('category-select');
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    categorySelect.appendChild(option);
+                });
+            }
+    
+            function onRejected(error) {
+                console.error("Error: ", error);
+            }
+    
+            function saveDataAndRedirect() {
+                const categorySelect = document.getElementById('category-select');
+                const difficultySelect = document.getElementById('difficulty-select');
+                
+                const selectedCategory = categorySelect.value;
+                const selectedCategoryName = categorySelect.options[categorySelect.selectedIndex].textContent;
+                const selectedDifficulty = difficultySelect.value;
+    
+                localStorage.setItem('category', selectedCategory);
+                localStorage.setItem('categoryName', selectedCategoryName);
+                localStorage.setItem('difficulty', selectedDifficulty);
+    
+                window.location.href = 'TheQuiz.html';
+            }
+        </script>
+    </body>
+    </html>
 
-    <h2>Select Difficulty</h2>
-    <select id="difficulty-select">
-    <option value="easy">Easy</option>
-    <option value="medium">Medium</option>
-    <option value="hard">Hard</option>
-    </select>
-
-
-    <h2>Question Type</h2>
-    <div id="question-type">...</div>
-
-    <h2>Question</h2>
-    <div id="question">...</div>
-
-    <h2>Answer</h2>
-    <div id="answer">...</div>
-
-    <h2>Choices</h2>
-    <div id="choices">...</div>
-
-    <button id="start">ENTER!!!!</button>
-</body>
-</html>
 

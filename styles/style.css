@@ -1,5 +1,5 @@
 
-:root{
+:root {
     /* Kleuren definiëren. */
     --textColor: black;
     --background: lightcyan;
@@ -10,25 +10,44 @@
     background: linear-gradient(to right, #00FFFF, #FF00FF);
 }
 
-#content
-{
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- color: var(--textColor);
- background-color: var(--background);
- width: 65%;
- max-width: 800px;
- min-width: 300px;
- max-height: 1200px;
- min-height: 500px;
- height: 900px;
- margin: 3% auto;
+#content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--textColor);
+    background-color: var(--background);
+    width: 65%;
+    max-width: 800px;
+    min-width: 300px;
+    max-height: 1200px;
+    min-height: 500px;
+    height: 900px; /* Default height */
+    margin: 3% auto;
+    border-radius: var(--borderRadius); /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+    padding: 20px; /* Add padding to space content from edges */
+    text-align: center; /* Center text content */
+
+    /* Media query for smaller screens */
+    @media (max-width: 800px) {
+        height: 600px; /* Adjusted height for smaller screens */
+    }
+
 }
-#quote
-{
+
+#quote {
     margin-top: 50px;
 }
 
+#NaarQuizButton {
+    margin-top: 20px; /* Add some margin to separate from the image */
+}
 
+#mainImage {
+    display: block; /* Ensures the image is displayed as a block element */
+    margin: 20px auto; /* Center the image horizontally and add spacing around it */
+    max-width: 80%; /* Make sure the image does not exceed its container's width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
 
 
 
