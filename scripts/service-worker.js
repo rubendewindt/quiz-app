@@ -8,7 +8,6 @@ const staticFiles = [
     '/offline.html',
     '/scripts/app.js',
     '/scripts/service-worker.js',
-    '/scripts/fetch.js',
     '/styles/style.css',
     '/manifest.json',
     '/images/icons/favicon.ico',
