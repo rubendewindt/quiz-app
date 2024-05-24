@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <title>Quiz</title>
-    <link href="styles/style.css" rel="stylesheet">
+ 
+    <link href="/styles/style.css" rel="stylesheet">
     <script src="scripts/app.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <h2>Category</h2>
-    <div id="category">...</div>
+    <div id="contentTheQuiz">
+        <h2 id="category"></h2>
+        <div id="question">...</div>
+        <h2 id="keuzes">Choices</h2>
+        <div id="choices">...</div>
+        <button  id="submit-answer">Submit Answer</button>
 
-    <h2>Question</h2>
-    <div id="question">...</div>
-
-    <h2>Choices</h2>
-    <div id="choices">...</div>
-
-    <button id="submit-answer">Submit Answer</button>
-
-    <h2>Time Remaining: <span id="timer">05:00</span></h2>
+    <h2 id="overigeTijd">Time Remaining: <span id="timer">05:00</span></h2>
     
-    <h2>Correct Answers: <span id="correct-counter">0</span></h2>
+    <h2 id="score">SCORE: <span id="correct-counter">0</span></h2>
+
+</div>
 
     <script>
         let correctAnswer = "";
@@ -130,27 +131,30 @@
                 alert('Please select an answer.');
             }
         }
-        // 5 min timer 
-       // function startTimer(duration, display) {
-           // let timer = duration, minutes, seconds;
-           // const interval = setInterval(() => {
-                //minutes = parseInt(timer / 60, 10);
-                //seconds = parseInt(timer % 60, 10);
+         
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(() => {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
 
-                //minutes = minutes < 10 ? "0" + minutes : minutes;
-                //seconds = seconds < 10 ? "0" + seconds : seconds;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                //display.textContent = minutes + ":" + seconds;
+                display.textContent = minutes + ":" + seconds;
 
-                //if (--timer < 0) {
+                if (--timer < 0) {
                    // clearInterval(interval);
                    // window.location.href = "EindeQuiz.html";  // Redirect to the Quiz Ended page
                     // Store correctCounter in localStorage to be retrieved on QuizEnded.html
                    // localStorage.setItem('totalScore', correctCounter);
-               // }
-           // }, 1000);
-        //}
+                }
+            }, 1000);
+        }
+
+
          // 3 min timer test doel 
+         /*
         function startTimer(duration, display) {
          let timer = duration, seconds;
         const interval = setInterval(() => {
@@ -171,6 +175,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     startTimer(30, document.getElementById('timer')); // 30 seconds timer
 });
+*/
     </script>
 </body>
 </html>

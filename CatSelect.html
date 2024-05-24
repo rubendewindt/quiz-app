@@ -7,25 +7,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="images/favicon.ico">
         <title>Fetch API demo</title>
-        <link href="styles/style.css" rel="stylesheet">
+            <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+         <!-- Compiled and minified JavaScript -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="/styles/style.css" rel="stylesheet">
         <script src="scripts/app.js"></script>
+        
         
         <link rel="manifest" href="manifest.json">
     </head>
     <body>
-        <h2>Select Category</h2>
-        <select id="category-select">
+        <div id="contentCatSelect">
+        <h2 id="schaduw">Select Category</h2>
+        <select id="category-select" class="browser-default">
             <option value="">Select a category...</option>
         </select>
     
-        <h2>Select Difficulty</h2>
-        <select id="difficulty-select">
+        <h2 id="schaduw">Select Difficulty</h2>
+        <select id="difficulty-select" class="browser-default">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
     
-        <button id="start">ENTER!!!!</button>
+        <button  id="start">start de quiz</button>
+        </div>
     
         <script>
             document.addEventListener('DOMContentLoaded', init);
