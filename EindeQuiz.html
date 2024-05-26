@@ -9,11 +9,13 @@
         <title>Fetch API demo</title>
         <link href="/styles/style.css" rel="stylesheet">
         <script src="scripts/app.js"></script>
+        <script src="scripts/musicPlayer.js"></script>
         
         <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <h2>Quiz Ended</h2>
+    <div id="contentEindeQuiz">
+    <h2 id="EindeQuizTitle">Quiz Ended</h2>
     <form id="username-form">
         <label for="username">Enter your username:</label>
         <input type="text" id="username" name="username" required>
@@ -22,19 +24,20 @@
     </form>
     
     <div id="score-container">
-        <h3>Your total score:</h3>
+        <h3 id="TotaleScore">Your total score:</h3>
         <!-- Display the total score retrieved from local storage -->
-        <p id="total-score">0</p>
+        <p id="correct-counter">0</p>
     </div>
 
     <!-- Button to trigger form submission -->
     <button id="submit-form-btn">Submit</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Retrieve the total score from local storage
             const totalScore = localStorage.getItem('totalScore');
-            document.getElementById('total-score').textContent = totalScore;
+            document.getElementById('correct-counter').textContent = totalScore;
             
             // Listen for button click to submit form
             document.getElementById('submit-form-btn').addEventListener('click', function(event) {
