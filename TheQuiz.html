@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <title>Quiz</title>
- 
     <link href="/styles/style.css" rel="stylesheet">
-    <script src="scripts/app.js"></script>
-
-                <!-- Font Awesome for icons -->
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="scripts/musicPlayer.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- YouTube IFrame Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="scripts/app.js" defer></script>
+    <script src="scripts/musicPlayer.js" defer></script>
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -22,16 +22,13 @@
         <div id="question">...</div>
         <h2 id="keuzes">Choices</h2>
         <div id="choices">...</div>
-        <button  id="submit-answer">Submit Answer</button> 
-        <button id="ToggleMusicButton"><i class="fas fa-volume-up"></i></button>
-
-    <h2 id="overigeTijd">Time Remaining: <span id="timer">05:00</span></h2>
-    
-    <h2 id="score">SCORE: <span id="correct-counter">0</span></h2>
-
-</div>
-           <!-- YouTube video for background music -->
-           <div id="player" style="display: none;"></div>
+        <button id="submit-answer">Submit Answer</button>
+        <button id="ToggleMusicButton"><i class="fas fa-volume-mute"></i></button>
+        <h2 id="overigeTijd">Time Remaining: <span id="timer">05:00</span></h2>
+        <h2 id="score">SCORE: <span id="correct-counter">0</span></h2>
+    </div>
+    <!-- YouTube video for background music -->
+    <div id="player" style="display: none;"></div>
     <script>
         let correctAnswer = "";
         let correctCounter = 0;
@@ -110,7 +107,6 @@
                 `;
             }
 
-            // Update the correct answer for later comparison
             correctAnswer = data.correct_answer;
         }
 
@@ -131,13 +127,12 @@
                 } else {
                     alert(`Not correct! The correct answer is: ${correct}`);
                 }
-                // Fetch a new question after the alert is dismissed
                 fetchNewQuestion(localStorage.getItem('category'), localStorage.getItem('difficulty'));
             } else {
                 alert('Please select an answer.');
             }
         }
-         
+
         function startTimer(duration, display) {
             let timer = duration, minutes, seconds;
             const interval = setInterval(() => {
@@ -150,16 +145,14 @@
                 display.textContent = minutes + ":" + seconds;
 
                 if (--timer < 0) {
-                   // clearInterval(interval);
-                   // window.location.href = "EindeQuiz.html";  // Redirect to the Quiz Ended page
-                    // Store correctCounter in localStorage to be retrieved on QuizEnded.html
-                   // localStorage.setItem('totalScore', correctCounter);
+                    clearInterval(interval);
+                    window.location.href = "EindeQuiz.html";
+                    localStorage.setItem('totalScore', correctCounter);
                 }
             }, 1000);
         }
 
-
-         // 3 min timer test doel 
+                 // 3 min timer test doel 
          /*
         function startTimer(duration, display) {
          let timer = duration, seconds;
@@ -182,69 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer(30, document.getElementById('timer')); // 30 seconds timer
 });
 */
-
-        // Load the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // Create the YouTube player
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'MwBceGgpRaI',
-                playerVars: {
-                    'autoplay': 1,
-                    'loop': 1,
-                    'playlist': 'MwBceGgpRaI'
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        // Function to be called when the player is ready
-        function onPlayerReady(event) {
-            // Try to play the video immediately
-            event.target.unMute();
-            event.target.playVideo();
-        }
-
-        // Handle autoplay block by listening for state changes
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PAUSED) {
-                document.body.addEventListener('click', playVideoWithSound, {once: true});
-            }
-        }
-
-        // Function to play video with sound after user interaction
-        function playVideoWithSound() {
-            player.unMute();
-            player.playVideo();
-        }
-
-        // Function to toggle music play/pause and mute/unmute
-        var musicPlaying = false;
-        document.getElementById('ToggleMusicButton').addEventListener('click', function() {
-            if (musicPlaying) {
-                player.mute();
-                player.pauseVideo();
-                this.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            } else {
-                player.unMute();
-                player.playVideo();
-                this.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }
-            musicPlaying = !musicPlaying;
-        });
     </script>
 </body>
 </html>
+
 
 
 

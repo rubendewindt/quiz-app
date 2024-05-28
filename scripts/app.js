@@ -13,11 +13,5 @@ window.addEventListener("load", function(){
     else
         console.log("No service worker supported...");
 
-
-        //navigeer button 
-
-        document.getElementById('NaarQuizButton').addEventListener('click', function() {
-            window.location.href = 'CatSelect.html';
-        });
 });
 

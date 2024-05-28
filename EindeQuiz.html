@@ -1,62 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-        <title>Fetch API demo</title>
-        <link href="/styles/style.css" rel="stylesheet">
-        <script src="scripts/app.js"></script>
-        <script src="scripts/musicPlayer.js"></script>
-        
-        <link rel="manifest" href="manifest.json">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Quiz Ended</title>
+    <link href="/styles/style.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- YouTube IFrame Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="scripts/app.js" defer></script>
+    <script src="scripts/musicPlayer.js" defer></script>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div id="contentEindeQuiz">
-    <h2 id="EindeQuizTitle">Quiz Ended</h2>
-    <form id="username-form">
-        <label for="username">Enter your username:</label>
-        <input type="text" id="username" name="username" required>
-        <!-- Submit button hidden, used only for form submission -->
-        <button id="submit-btn" type="submit" style="display: none;"></button>
-    </form>
-    
-    <div id="score-container">
-        <h3 id="TotaleScore">Your total score:</h3>
-        <!-- Display the total score retrieved from local storage -->
-        <p id="correct-counter">0</p>
+        <h2 id="EindeQuizTitle">Quiz Ended</h2>
+        <form id="username-form">
+            <label for="username">Enter your username:</label>
+            <input type="text" id="username" name="username" required>
+            <!-- Submit button hidden, used only for form submission -->
+            <button id="submit-btn" type="submit" style="display: none;"></button>
+        </form>
+        <div id="score-container">
+            <h3 id="TotaleScore">Your total score:</h3>
+            <p id="correct-counter">0</p>
+        </div>
+        <button id="submit-form-btn">Submit</button>
+        <button id="ToggleMusicButton"><i class="fas fa-volume-mute"></i></button>
     </div>
-
-    <!-- Button to trigger form submission -->
-    <button id="submit-form-btn">Submit</button>
-    </div>
-
+    <div id="player" style="display: none;"></div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Retrieve the total score from local storage
             const totalScore = localStorage.getItem('totalScore');
             document.getElementById('correct-counter').textContent = totalScore;
-            
-            // Listen for button click to submit form
+
             document.getElementById('submit-form-btn').addEventListener('click', function(event) {
-                // Manually submit the form
                 document.getElementById('submit-btn').click();
             });
 
-            // Listen for form submission
             document.getElementById('username-form').addEventListener('submit', function(event) {
                 event.preventDefault();
-                
-                // Retrieve the username from the form input
                 const username = document.getElementById('username').value;
-                
-                // Do something with the username (e.g., save it to local storage)
                 localStorage.setItem('username', username);
-                
-                // Redirect to the Index.html page
-                window.location.href = "Index.html"; // Replace with the URL of your target page
+                window.location.href = "Index.html";
             });
         });
     </script>

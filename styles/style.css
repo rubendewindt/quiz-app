@@ -225,9 +225,6 @@ body {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.7), 2px 2px 5px rgba(0,0,0,0.7); /* Apply multiple shadows for 3D effect */
 }
 
-#quote {
-    margin-top: 50px;
-}
 
 #NaarQuizButton {
     margin-top: 20px; /* Add some margin to separate from the image */
@@ -305,6 +302,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px; /* Add some letter spacing for a futuristic look */
     animation: neon-glow 1.5s ease-in-out infinite alternate; /* Add a neon glow effect */
+    margin-top: 50px;
 }
 
 @keyframes neon-glow {

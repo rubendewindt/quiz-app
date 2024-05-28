@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>Fetch API demo</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- YouTube IFrame Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="scripts/app.js" defer></script>
+    <script src="scripts/musicPlayer.js" defer></script>
     <link href="/styles/style.css" rel="stylesheet">
-    <script src="scripts/app.js"></script>
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -30,7 +33,7 @@
         </select>
 
         <button id="start">start de quiz</button>
-        <button id="ToggleMusicButton"><i class="fas fa-volume-up"></i></button>
+        <button id="ToggleMusicButton"><i class="fas fa-volume-mute"></i></button>
     </div>
 
     <!-- YouTube video for background music -->
@@ -76,76 +79,9 @@
             localStorage.setItem('category', selectedCategory);
             localStorage.setItem('categoryName', selectedCategoryName);
             localStorage.setItem('difficulty', selectedDifficulty);
-            localStorage.setItem('musicState', musicPlaying ? 'playing' : 'muted');
 
             window.location.href = 'TheQuiz.html';
         }
-
-        // Load the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // Create the YouTube player
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'MwBceGgpRaI',
-                playerVars: {
-                    'autoplay': 1,
-                    'loop': 1,
-                    'playlist': 'MwBceGgpRaI'
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        // Function to be called when the player is ready
-        function onPlayerReady(event) {
-            // Try to play the video immediately
-            event.target.unMute();
-            event.target.playVideo();
-        }
-
-        // Handle autoplay block by listening for state changes
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PAUSED) {
-                document.body.addEventListener('click', playVideoWithSound, {once: true});
-            }
-        }
-
-        // Function to play video with sound after user interaction
-        function playVideoWithSound() {
-            player.unMute();
-            player.playVideo();
-        }
-
-// Load music state from localStorage or default to false
-var musicPlaying = localStorage.getItem('musicState') === 'playing' ? true : false;
-
-// Function to toggle music play/pause and mute/unmute
-document.getElementById('ToggleMusicButton').addEventListener('click', function() {
-    if (musicPlaying) {
-        player.mute();
-        player.pauseVideo();
-        this.innerHTML = '<i class="fas fa-volume-mute"></i>';
-    } else {
-        player.unMute();
-        player.playVideo();
-        this.innerHTML = '<i class="fas fa-volume-up"></i>';
-    }
-    musicPlaying = !musicPlaying;
-});
-
-        // Update the button icon based on the initial mute state
-        var icon = musicPlaying ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
-        document.getElementById('ToggleMusicButton').innerHTML = icon;
     </script>
 </body>
 </html>

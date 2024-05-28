@@ -1,52 +1,81 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Your JavaScript code here
     var player;
-
-    // Function to toggle music play/pause and mute/unmute
-    document.getElementById('ToggleMusicButton').addEventListener('click', function() {
-        if (!player) {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'MwBceGgpRaI',
-                playerVars: {
-                    'autoplay': 1,
-                    'loop': 1,
-                    'playlist': 'MwBceGgpRaI'
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        } else {
-            if (player.isMuted()) {
-                player.unMute();
-                this.innerHTML = '<i class="fas fa-volume-up"></i>';
-            } else {
-                player.mute();
-                this.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            }
-            // Store music state in localStorage
-            localStorage.setItem('musicState', player.isMuted() ? 'muted' : 'playing');
-        }
-    });
+    var musicPlaying = localStorage.getItem('musicState') === 'playing';
 
     function onPlayerReady(event) {
-        event.target.playVideo();
-        // Update the button icon based on the initial mute state
-        var icon = player.isMuted() ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+        if (musicPlaying) {
+            event.target.unMute();
+            event.target.playVideo();
+        } else {
+            event.target.mute();
+        }
+        updateMusicButton();
+    }
+
+    function updateMusicButton() {
+        var icon = musicPlaying ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
         document.getElementById('ToggleMusicButton').innerHTML = icon;
     }
 
-    // Load the music state when the page loads
-    const musicState = localStorage.getItem('musicState');
-    if (musicState === 'muted') {
-        // Mute the player and update the button icon
-        player.mute();
-        document.getElementById('ToggleMusicButton').innerHTML = '<i class="fas fa-volume-mute"></i>';
-    } else {
-        // Unmute the player and update the button icon
-        player.unMute();
-        document.getElementById('ToggleMusicButton').innerHTML = '<i class="fas fa-volume-up"></i>';
+    function createPlayer() {
+        player = new YT.Player('player', {
+            height: '0',
+            width: '0',
+            videoId: 'MwBceGgpRaI',
+            playerVars: {
+                'autoplay': 1,
+                'loop': 1,
+                'playlist': 'MwBceGgpRaI'
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
     }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PAUSED && musicPlaying) {
+            document.body.addEventListener('click', playVideoWithSound, { once: true });
+        }
+    }
+
+    function playVideoWithSound() {
+        player.unMute();
+        player.playVideo();
+    }
+
+    document.getElementById('ToggleMusicButton').addEventListener('click', function() {
+        if (!player) {
+            console.warn('Player is not initialized yet.');
+            return;
+        }
+
+        if (musicPlaying) {
+            player.mute();
+            player.pauseVideo();
+            this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        } else {
+            player.unMute();
+            player.playVideo();
+            this.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+
+        musicPlaying = !musicPlaying;
+        localStorage.setItem('musicState', musicPlaying ? 'playing' : 'muted');
+    });
+
+    window.onYouTubeIframeAPIReady = function() {
+        createPlayer();
+    };
+
+    // Ensure player is created if API is already loaded
+    if (window.YT && window.YT.Player) {
+        createPlayer();
+    }
+
+    updateMusicButton();
 });
+
+
+
