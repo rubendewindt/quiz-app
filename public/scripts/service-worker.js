@@ -3,24 +3,24 @@ const DYNAMIC_CACHE_NAME = "dynamic-version-1";
 
 // Array met alle static files die gecached moeten worden.
 const staticFiles = [
-    '/index.html',
-    '/CatSelect.html',
-    '/offline.html',
-    '/scripts/app.js',
-    '/scripts/service-worker.js',
-    '/scripts/MusicPlayer.js',
-    '/styles/style.css',
-    '/manifest.json',
-    '/images/openart-image_wfSvayW5_1716492442037_raw.jpg',
-    '/images/NoConnection.gif',
-    '/images/icons/favicon.ico',
-    '/images/icons/vives48.png',
-    '/images/icons/vives72.png',
-    '/images/icons/vives96.png',
-    '/images/icons/vives144.png',
-    '/images/icons/vives168.png',
-    '/images/icons/vives192.png',
-    '/images/icons/vives512.png'
+    '/public/index.html',
+    '/public/CatSelect.html',
+    '/public/offline.html',
+    '/public/scripts/app.js',
+    '/public/scripts/service-worker.js',
+    '/public/scripts/MusicPlayer.js',
+    '/public/styles/style.css',
+    '/public/manifest.json',
+    '/public/images/openart-image_wfSvayW5_1716492442037_raw.jpg',
+    '/public/images/NoConnection.gif',
+    '/public/images/icons/favicon.ico',
+    '/public/images/icons/vives48.png',
+    '/public/images/icons/vives72.png',
+    '/public/images/icons/vives96.png',
+    '/public/images/icons/vives144.png',
+    '/public/images/icons/vives168.png',
+    '/public/images/icons/vives192.png',
+    '/public/images/icons/vives512.png'
 ];
 
 self.addEventListener("install", (event) => {
