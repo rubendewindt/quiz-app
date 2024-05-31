@@ -147,13 +147,13 @@
 
                 if (--timer < 0) {
                     clearInterval(interval);
-                    window.location.href = "EindeQuiz.html";
                     localStorage.setItem('totalScore', correctCounter);
+                    localStorage.setItem('categoryName', document.getElementById('category').innerText);
+                    window.location.href = "EindeQuiz.html";
                 }
             }, 1000);
         }
-
-                 // 3 min timer test doel 
+                         // 3 min timer test doel 
          /*
         function startTimer(duration, display) {
          let timer = duration, seconds;

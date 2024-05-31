@@ -30,11 +30,129 @@
         </div>
         <button id="submit-form-btn">Submit</button>
         <button id="ToggleMusicButton"><i class="fas fa-volume-mute"></i></button>
+        <div id="scoreList">
+            <!-- Scores will be dynamically added here -->
+        </div>
     </div>
     <div id="player" style="display: none;"></div>
     <script>
+        // Function to display all scores in the HTML
+        function displayScoresInHTML(scores) {
+            var scoreListContainer = document.getElementById('scoreList');
+            scoreListContainer.innerHTML = ''; // Clear previous content
+
+            scores.forEach(function(score) {
+                var scoreElement = document.createElement('div');
+                scoreElement.textContent = 'Username: ' + score.username + ', Score: ' + score.score + ', Category: ' + score.category;
+                scoreListContainer.appendChild(scoreElement);
+            });
+        }
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure IndexedDB is supported
+    if (!window.indexedDB) {
+        console.log("IndexedDB not supported.");
+    }
+
+    // Open (or create) the database
+    var request = indexedDB.open("quizDB", 1);
+    var db;
+
+    // Handle database upgrades
+    request.onupgradeneeded = function(event) {
+        db = event.target.result;
+        // Create an object store for user scores with auto-increment key
+        var scoreStore = db.createObjectStore("scores", { keyPath: "id", autoIncrement: true });
+        scoreStore.createIndex("username", "username", { unique: false });
+        scoreStore.createIndex("score", "score", { unique: false });
+        scoreStore.createIndex("category", "category", { unique: false });
+    };
+
+    request.onsuccess = function(event) {
+        db = event.target.result;
+        displayAllScores(); // Call function to display all scores
+    };
+
+    request.onerror = function(event) {
+        console.log("Error opening database:", event);
+    };
+
+    // Function to display all scores
+    function displayAllScores() {
+                var transaction = db.transaction(["scores"], "readonly");
+                var scoreStore = transaction.objectStore("scores");
+                var request = scoreStore.openCursor();
+                var scores = [];
+
+                request.onsuccess = function(event) {
+                    var cursor = event.target.result;
+                    if (cursor) {
+                        scores.push(cursor.value);
+                        cursor.continue();
+                    } else {
+                        console.log("No more entries");
+                        displayScoresInHTML(scores); // Display scores in HTML
+                    }
+                };
+
+                request.onerror = function(event) {
+                    console.log("Error retrieving scores:", event);
+                };
+            }
+            displayAllScores();
+});
+
+        // Ensure IndexedDB is supported
+        if (!window.indexedDB) {
+            console.log("IndexedDB not supported.");
+        }
+
+        // Open (or create) the database
+        var request = indexedDB.open("quizDB", 1);
+        var db;
+
+        // Handle database upgrades
+        request.onupgradeneeded = function(event) {
+            db = event.target.result;
+            // Create an object store for user scores with auto-increment key
+            var scoreStore = db.createObjectStore("scores", { keyPath: "id", autoIncrement: true });
+            scoreStore.createIndex("username", "username", { unique: false });
+            scoreStore.createIndex("score", "score", { unique: false });
+            scoreStore.createIndex("category", "category", { unique: false });
+        };
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+        };
+
+        request.onerror = function(event) {
+            console.log("Error opening database:", event);
+        };
+
+        // Function to store username, score, and category
+        function storeUserScore(username, score, category) {
+            var transaction = db.transaction(["scores"], "readwrite");
+            var scoreStore = transaction.objectStore("scores");
+
+            var userScore = {
+                username: username,
+                score: score,
+                category: category
+            };
+
+            var request = scoreStore.add(userScore);
+
+            request.onsuccess = function() {
+                console.log("Score added:", userScore);
+            };
+
+            request.onerror = function(event) {
+                console.log("Error adding score:", event);
+            };
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const totalScore = localStorage.getItem('totalScore');
+            const category = localStorage.getItem('categoryName');
             document.getElementById('correct-counter').textContent = totalScore;
 
             document.getElementById('submit-form-btn').addEventListener('click', function(event) {
@@ -44,6 +162,9 @@
             document.getElementById('username-form').addEventListener('submit', function(event) {
                 event.preventDefault();
                 const username = document.getElementById('username').value;
+                const totalScore = parseInt(localStorage.getItem('totalScore'), 10) || 0;
+
+                storeUserScore(username, totalScore, category);
                 localStorage.setItem('username', username);
                 window.location.href = "index.html";
             });
@@ -51,3 +172,4 @@
     </script>
 </body>
 </html>
+
