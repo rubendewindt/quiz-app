@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateMusicButton() {
         var icon = musicPlaying ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
-        document.getElementById('ToggleMusicButton').innerHTML = icon;
+        document.getElementById('ToggleMusicknop').innerHTML = icon;
     }
 
     function createPlayer() {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         player.playVideo();
     }
 
-    document.getElementById('ToggleMusicButton').addEventListener('click', function() {
+    document.getElementById('ToggleMusicknop').addEventListener('click', function() {
         if (!player) {
             console.warn('Player is not initialized yet.');
             return;
