@@ -288,16 +288,21 @@ body {
 }
 #scoreTableContainer {
     margin-top: 20px;
+    align-self: center;
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
+
 #scoreTable {
     width: 100%;
     border-collapse: collapse;
 }
+
 #scoreTable th, #scoreTable td {
     padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: left;
 }
+
 #scoreTable th {
     background-color: #f2f2f2;
 }
@@ -372,6 +377,18 @@ body {
 /* Add a focus effect */
 #difficulty-select:focus {
     border-bottom: 2px solid #FFC107; /* Change border color on focus */
+}
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    #contentCatSelect {
+        width: 90%; /* Adjust width for smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    #scoreTable th, #scoreTable td {
+        padding: 8px 10px; /* Adjust padding for smaller screens */
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
 }
 
 
