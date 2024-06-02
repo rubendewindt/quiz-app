@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- welk lettertype groote van de vieuwport en het thema kleur -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#00FFFF">
-    <title>Quiz app</title>
+    <title>Quiz</title>
+    <!-- favicon inladen -->
     <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
     <!-- Link naar stijlblad. -->
     <link href="styles/style.css" rel="stylesheet">
@@ -16,27 +18,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- YouTube IFrame Player API -->
     <script src="https://www.youtube.com/iframe_api"></script>
+    <!-- links naar eigen scripts -->
+    <!-- dit eerste script zal mijn service-worker.js aanroepen en aanmaken -->
     <script src="scripts/app.js" defer></script>
     <script src="scripts/musicPlayer.js" defer></script>
+    <script src="scripts/index.js" defer></script>
+    <!-- link naar de miniifest file die er voor zorgt dat de app instaleerbaar is  -->
     <link rel="manifest" href="manifest.json">
 </head>
-<body class="body">
+<!-- inhoud met id s en classes die js en stijl aanspreken die functionaliteit geven aan onze pagina  -->
+<body >
     <div id="content">
         <div>
             <h1 class="futuristic-title">QUIZ TEST YOUR BIG BRAIN!</h1>
             <img id="mainImage" src="images/openart-image_wfSvayW5_1716492442037_raw.jpg" alt="Image Description">
+            <!-- deze button zal navigeren naar de volgende pagina CatSelect.html spreekt de index.js aan -->
             <button id="NaarQuizButton">Let's go</button>
+            <!-- deze button zal de muziek speler aan en uit zetten via de musicPlayer.js-->
             <button id="ToggleMusicknop"><i class="fas fa-volume-mute"></i></button>
         </div>
     </div>
     <!-- YouTube video for background music -->
     <div id="player" style="display: none;"></div>
 </body>
-<script>
-    document.getElementById('NaarQuizButton').addEventListener('click', function() {
-        window.location.href = 'CatSelect.html';
-    });
-</script>
 </html>
 
 

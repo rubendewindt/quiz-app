@@ -304,6 +304,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow */
     transition: background-color 0.3s ease; /* Add a smooth transition for background color */
     text-align: center;
+    font-size: 12px; /* Smaller font size */
 }
 #start:hover {
     background-color: #FF00FF; /* Change background color on hover */
