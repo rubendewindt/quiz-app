@@ -15,6 +15,7 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="scripts/app.js" defer></script>
     <script src="scripts/musicPlayer.js" defer></script>
+    <script src="scripts/serial.js" defer></script>
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -27,6 +28,10 @@
         <button id="ToggleMusicknop"><i class="fas fa-volume-mute"></i></button>
         <h2 id="overigeTijd">Time Remaining: <span id="timer">05:00</span></h2>
         <h2 id="score">SCORE: <span id="correct-counter">0</span></h2>
+        <fieldset id="fldSelectComPort">
+            <legend>Select COM-port</legend>                    
+            <button id="btnRequestComPort">Request permission and open port</button>
+        </fieldset>
     </div>
     <!-- YouTube video for background music -->
     <div id="player" style="display: none;"></div>
@@ -125,6 +130,7 @@
                     alert('Correct!');
                     correctCounter++;
                     document.getElementById('correct-counter').textContent = correctCounter;
+                    sendScoreToSerial(correctCounter);  // Call function to send score via serial
                 } else {
                     alert(`Not correct! The correct answer is: ${correct}`);
                 }
@@ -153,32 +159,11 @@
                 }
             }, 1000);
         }
-                         // 3 min timer test doel 
-         /*
-        function startTimer(duration, display) {
-         let timer = duration, seconds;
-        const interval = setInterval(() => {
-        seconds = parseInt(timer % 60, 10);
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = "00:" + seconds; // Fixed minutes to 00 since it's always 0 for 30 seconds countdown
-
-            if (--timer < 0) {
-                 clearInterval(interval);
-                window.location.href = "EindeQuiz.html";  // Redirect to the Quiz Ended page
-                // Store correctCounter in localStorage to be retrieved on QuizEnded.html
-                localStorage.setItem('totalScore', correctCounter);
-            }
-         }, 1000);
-    }
-
-document.addEventListener('DOMContentLoaded', () => {
-    startTimer(30, document.getElementById('timer')); // 30 seconds timer
-});
-*/
     </script>
 </body>
 </html>
+
+
 
 
 

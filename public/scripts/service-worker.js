@@ -11,6 +11,7 @@ const staticFiles = [
     '/public/scripts/app.js',
     '/public/scripts/service-worker.js',
     '/public/scripts/musicPlayer.js',
+    '/public/scripts/serial.js',
     '/public/styles/style.css',
     '/public/manifest.json',
     '/public/images/openart-image_wfSvayW5_1716492442037_raw.jpg',
