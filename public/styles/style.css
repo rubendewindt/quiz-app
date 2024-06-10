@@ -83,9 +83,6 @@ body {
     padding: 20px; /* Add padding to space content from edges */
     text-align: center; /* Center text content */ 
     border: 3px solid #ddd; /* Add a border with a color */
-    height: 80vh; /* Set height to 80% of the viewport height */
-
-    /* Make all child elements take up full width */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
