@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //hier wordt de timer functie aangeroepen die onderaan in de pagina 
     //wat wordt mee gegeven aan deze functie ?
     //hoelang deze timer zal draaien en waar deze timer zal worden afgebeeld
-    //waar wordt deze afgebeeld ?? hier : document.getElementById('timer') zo roep je een html item op met behulp van een id
-    startTimer(300, document.getElementById('timer'));
+    //waar wordt deze afgebeeld ?? hier : document.getElementById('timer') zo roep je een html item op met behulp van een id 300 is 5 min 
+    startTimer(90, document.getElementById('timer'));
 
 
     //deze code zal lijsteren naar het event click bij het element met id submit-answer in de html pagina 

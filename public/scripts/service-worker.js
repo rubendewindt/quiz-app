@@ -3,7 +3,7 @@ const DYNAMIC_CACHE_NAME = "dynamic-version-1";
 
 // Array with all static files to be cached
 const staticFiles = [
-    /*
+    
     //cache paden voor ofline (localhost)
     '/public/index.html',
     '/public/CatSelect.html',
@@ -28,7 +28,7 @@ const staticFiles = [
     '/public/images/icons/vives168.png',
     '/public/images/icons/vives192.png',
     '/public/images/icons/vives512.png'
-    */
+    /*
     
     //cache paden voor online (firebase)
     '/index.html',
@@ -54,7 +54,7 @@ const staticFiles = [
     '/images/icons/vives168.png',
     '/images/icons/vives192.png',
     '/images/icons/vives512.png'
-    
+    */
    
 ];
 
